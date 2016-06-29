@@ -15,7 +15,7 @@
 			<td><?=$newsValue->user_name ?></td><!--echo out all possible maginzine from the database in a table -->
 			<td>
 				<input type="checkbox" id="<?=$newsValue->id ?>" >
-				<label onclick="" for="<?=$newsValue->id ?>"></label><!--if the users chekes the chekbox it will be noted in the database :) -->
+				<label onclick="submit(this.id)" for="<?=$newsValue->id ?>" id="<?=$newsValue->id ?>" ></label><!--if the users chekes the chekbox it will be noted in the database :) -->
 			</td>
 		</tr>
 		<?php
@@ -23,23 +23,32 @@
 		?>
 	</tbody>
 </table>
-<div id="status" style="height:25px;width:25px;display:inline-block;background-color:blue;">
+<div id="status" style="padding-bottom:180px;padding-right:75px;opacity: 0;left:85%;top:-45px;position:relative;height:25px;width:25px;display:inline-block;background-color:blue;">
 
 </div>
 <script type="text/javascript">
-function submit()
+function submit(id)
 {
+	document.getElementById("status").style.backgroundColor  = "blue";
+	document.getElementById("status").style.opacity  = "1";
 	$.ajax({
     type: "POST",
-    url:"<?php echo Config::get('URL'); ?>",
-    data:{id: "bla",csrf_token: '<?= Csrf::makeToken();?>'},//sending a token to prevent xss 
+    url:"<?php echo Config::get('URL'); ?>News/setNewsLetter",
+    data:{id: id,csrf_token: '<?= Csrf::makeToken();?>'},//sending a token to prevent xss 
     success: function() 
     {
-		document.getElementById("status").css.backgroundColor = "green";//if succes the color becomes green
-    }
+		document.getElementById("status").style.backgroundColor  = "green";//if succes the color becomes green
+		document.getElementById("status").innerHTML  = "u bent succesvol voor deze nieuwbrief aangemeld /afgemeld";//tells the user the request has succeeded
+		setTimeout(function() {
+			document.getElementById("status").innerHTML  = "";//resetes the div to be hidden and empty
+			document.getElementById("status").style.opacity  = "0";
+		}, 30000);
+    },
     fail:function()
     {
-    	document.getElementById("status").css.backgroundColor = "red";// if it fails :( the color becomes red
+    	document.getElementById("status").style.backgroundColor  = "red";// if it fails :( the color becomes red
+    	document.getElementById("status").innerHTML  = "er is iets mis gegaan helaas :(" ;//resetes the div to be hidden and empty
     }
+	});
 }
 </script>

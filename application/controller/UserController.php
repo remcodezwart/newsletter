@@ -55,24 +55,6 @@ class UserController extends Controller
         UserModel::editUserName(Request::post('user_name'));
         Redirect::to('user/editUsername');
     }
-
-    /**
-     * Show edit-my-user-email page
-     */
-    public function editUserEmail()
-    {
-        $this->View->render('user/editUserEmail');
-    }
-
-    /**
-     * Edit user email (perform the real action after form has been submitted)
-     */
-    // make this POST
-    public function editUserEmail_action()
-    {
-        UserModel::editUserEmail(Request::post('user_email'));
-        Redirect::to('user/editUserEmail');
-    }
     /**
      * Password Change Page
      */

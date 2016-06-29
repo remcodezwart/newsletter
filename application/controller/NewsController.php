@@ -16,6 +16,16 @@ class NewsController extends Controller
     		'news' => NewsModel::getAllNewsLetters(), 
     	));//renders the index of the NewsController 
     }
+    public function setNewsLetter()
+    {
+        if (!Csrf::isTokenValid()) {
+            LoginModel::logout();
+            Redirect::home();
+            exit();
+        }//cheks the token to prevent xss
+
+
+    }
 }
 
 

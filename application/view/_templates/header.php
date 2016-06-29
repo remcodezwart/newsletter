@@ -48,9 +48,6 @@
                     <li <?php if (View::checkForActiveController($filename, "user/editusername")) { echo ' class="active" '; } ?> >
                     <a href="<?php echo Config::get('URL'); ?>user/editusername">wiijzig mijn gebruisnaam</a>
                     </li>
-                    <li <?php if (View::checkForActiveController($filename, "user/edituseremail")) { echo ' class="active" '; } ?> >
-                    <a href="<?php echo Config::get('URL'); ?>user/edituseremail">wijzig mijn email</a>
-                    </li>
                     <li <?php if (View::checkForActiveController($filename, "user/changePassword")) { echo ' class="active" '; } ?> >
                     <a href="<?php echo Config::get('URL'); ?>user/changePassword">wijzig mijn wachtwoord</a>
                     </li>

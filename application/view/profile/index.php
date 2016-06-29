@@ -8,6 +8,7 @@
             <td>Link to user's profile</td>
         </tr>
         </thead>
+        <tbody>
         <?php foreach ($this->users as $user) { ?>
             <tr class="<?= ($user->user_active == 0 ? 'inactive' : 'active'); ?>">
                 <td><?= $user->user_name; ?></td>
@@ -16,5 +17,6 @@
                 </td>
             </tr>
         <?php } ?>
+        </tbody>
     </table>
 </div>
