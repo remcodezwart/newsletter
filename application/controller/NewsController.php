@@ -22,9 +22,29 @@ class NewsController extends Controller
             LoginModel::logout();
             Redirect::home();
             exit();
-        }//cheks the token to prevent xss
+        }//cheks the token to prevent cross side scripting forging
+        NewsModel::AddRemoveNewsletterFromUser();
 
-
+    }
+    public function addLetter()
+    {
+        Auth::checkAdminAuthentication();//this makes sure only users with acount type 7 (admin) can acces this function
+        $this->View->render('newsletter/NewLetter');
+    }
+    public function addLetter_action()
+    {
+        Auth::checkAdminAuthentication();//cheks that the user is an admin since thise is an admin only feature 
+        if (!Csrf::isTokenValid()) {//token agains Cross-Site Request Forgery even if the user needs to be logged in and an admin still chek it
+            LoginModel::logout();
+            Redirect::home();
+            exit();
+        }//cheks the token to prevent cross side scripting forging
+        $result = NewsModel::addNewLetter();
+        if ($result) {
+            redirect::to('user/index');
+        } else {
+            redirect::to('News/addLetter');
+        }
     }
 }
 

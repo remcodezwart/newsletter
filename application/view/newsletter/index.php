@@ -15,7 +15,7 @@
 			<td><?=$newsValue->user_name ?></td><!--echo out all possible maginzine from the database in a table -->
 			<td>
 				<input type="checkbox" id="<?=$newsValue->id ?>" >
-				<label onclick="submit(this.id)" for="<?=$newsValue->id ?>" id="<?=$newsValue->id ?>" ></label><!--if the users chekes the chekbox it will be noted in the database :) -->
+				<label onclick="submit(<?=$newsValue->id ?>)" for="<?=$newsValue->id ?>"></label><!--if the users chekes the chekbox it will be noted in the database :) -->
 			</td>
 		</tr>
 		<?php
@@ -29,19 +29,25 @@
 <script type="text/javascript">
 function submit(id)
 {
+	var cheked = document.getElementById(id).checked; //gets the value of the chekbox
+	if (!cheked == true) {//since the value of the chekbox already got changed before javascript cheked if it was chekend were cheking for when is it is not true 
+		var value = "on";
+	} else {
+		var value = "off";
+	}
 	document.getElementById("status").style.backgroundColor  = "blue";
 	document.getElementById("status").style.opacity  = "1";
 	$.ajax({
     type: "POST",
     url:"<?php echo Config::get('URL'); ?>News/setNewsLetter",
-    data:{id: id,csrf_token: '<?= Csrf::makeToken();?>'},//sending a token to prevent xss 
+    data:{value:value,id: id,csrf_token: '<?= Csrf::makeToken();?>'},//sending a token to prevent CSRF  
     success: function() 
     {
-		document.getElementById("status").style.backgroundColor  = "green";//if succes the color becomes green
-		document.getElementById("status").innerHTML  = "u bent succesvol voor deze nieuwbrief aangemeld /afgemeld";//tells the user the request has succeeded
+		document.getElementById("status").style.backgroundColor = "green";//if succes the color becomes green
+		document.getElementById("status").innerHTML = "u bent succesvol voor deze nieuwbrief aangemeld /afgemeld";//tells the user the request has succeeded
 		setTimeout(function() {
-			document.getElementById("status").innerHTML  = "";//resetes the div to be hidden and empty
-			document.getElementById("status").style.opacity  = "0";
+			document.getElementById("status").innerHTML = "";//resetes the div to be hidden and empty
+			document.getElementById("status").style.opacity = "0";
 		}, 30000);
     },
     fail:function()
