@@ -50,7 +50,7 @@ class NewsController extends Controller
     }
     public function EditNewsletter_action()
     {
-         Auth::checkAdminAuthentication();//cheks that the user is an admin since thise is an admin only feature 
+        Auth::checkAdminAuthentication();//cheks that the user is an admin since thise is an admin only feature 
         if (!Csrf::isTokenValid()) {//token agains Cross-Site Request Forgery even if the user needs to be logged in and an admin still chek it
             LoginModel::logout();
             Redirect::home();
