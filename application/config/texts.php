@@ -72,4 +72,11 @@ return array(
 	"FEEDBACK_NOTE_DELETION_FAILED" => "Note deletion failed.",
 	"FEEDBACK_COOKIE_INVALID" => "Your remember-me-cookie is invalid.",
 	"FEEDBACK_COOKIE_LOGIN_SUCCESSFUL" => "You were successfully logged in via the remember-me-cookie.",
+	"FAILED_CREATION" => "Failed to create new newsletter",
+	"FAILED_CREATION_EMPTY_NAME" => "Failed to create new newsletter no name provided",
+	"FAILED_TO_GET_NEWSLETTER" => "Failed to get information of newsletter",
+	"NO_NAME_OF_NEWSLETTER" => "No name of newsletter provided",
+	"NOT_OWNER_OF_THIS_NEWSLETTER" => "You are not the owner of this newsletter",
+	"SUCCES_DELETION_OF_NEWSLETTER" => "News letter has been succesfully deleted",
+	"SUCCES_EDIT_OF_NEWSLETTER" => "Newsletter has been succesfully edited"
 );

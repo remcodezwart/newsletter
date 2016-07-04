@@ -62,6 +62,7 @@ class View
      */
     public function renderWithoutHeaderAndFooter($filename, $data = null)
     {
+       
         if ($data) {
             foreach ($data as $key => $value) {
                 $this->{$key} = $value;

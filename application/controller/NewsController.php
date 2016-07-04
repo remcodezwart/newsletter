@@ -29,7 +29,9 @@ class NewsController extends Controller
     public function addLetter()
     {
         Auth::checkAdminAuthentication();//this makes sure only users with acount type 7 (admin) can acces this function
-        $this->View->render('newsletter/NewLetter');
+        $this->View->render('newsletter/newLetter' ,array(
+            'currentLetters' => NewsModel::getAllNewsLettersOfCurrentUser()
+            ));
     }
     public function addLetter_action()
     {
@@ -45,6 +47,19 @@ class NewsController extends Controller
         } else {
             redirect::to('News/addLetter');
         }
+    }
+    public function EditNewsletter_action()
+    {
+         Auth::checkAdminAuthentication();//cheks that the user is an admin since thise is an admin only feature 
+        if (!Csrf::isTokenValid()) {//token agains Cross-Site Request Forgery even if the user needs to be logged in and an admin still chek it
+            LoginModel::logout();
+            Redirect::home();
+            exit();
+        }//cheks the token to prevent cross side scripting forging
+
+        NewsModel::EditOrDeleteNewsletter(); //changes or deletes the newsletter
+
+        redirect::to('News/addLetter'); //redirect to the current page
     }
 }
 

@@ -65,6 +65,11 @@
                         } ?> >
                             <a href="<?php echo Config::get('URL'); ?>admin/">Admin</a>
                         </li>
+                        <li> <?php if (View::checkForActiveControllerAndAction($filename, "News/addLetter")) {
+                            echo ' class="active" ' ;
+                        } ?> 
+                            <a href="<?php echo Config::get('URL');?> News/addLetter"> voeg een nieuwe nieuwsbrief toe </a>
+                        </li>
                     </ul>
                 </nav>
             <?php endif; ?>
